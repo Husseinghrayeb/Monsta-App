@@ -1,0 +1,39 @@
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100%;">
+    <div class="card" style="width: 50%;">
+        <div class="card-body">
+            <h1 class="card-title">Login</h1>
+            <div *ngIf="showError" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+            </div>
+    
+            <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="loginUser(loginForm.value)">
+                <div class="mb-3 row">
+                    <label for="username" class="col-form-label col-sm-2">Username:</label>
+                    <div class="col-md-5">
+                        <input type="text" id="username" formControlName="username" class="form-control" [ngClass]="{'border-danger': (validateControl('username') && hasError('username', 'required'))}"/>
+                    </div>
+                    <div class="col-md-5">
+                        <em *ngIf="validateControl('username') && hasError('username', 'required')" style="color: #DC3545;">Username is
+                            required</em>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="password" class="col-form-label col-sm-2">Password:</label>
+                    <div class="col-md-5">
+                        <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="{'border-danger': (validateControl('password') && hasError('password', 'required'))}"/>
+                    </div>
+                    <div class="col-md-5">
+                        <em *ngIf="validateControl('password') && hasError('password', 'required')" style="color: #DC3545;">Password is
+                            required</em>
+                    </div>
+                </div>
+                <br>
+                <div class="mb-3 row">
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-info" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
