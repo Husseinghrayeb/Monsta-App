@@ -28,12 +28,8 @@ export class AuthService {
     this.sendAuthStateChangeNotification(false);
   }
 
-  private createCompleteRoute = (route: string, url: string) => {
-    return `${url}/${route}`;
-  }
-
-  public loginUser = (route: string, body: UserForAuthenticationDto) => {
-    return this.http.post<AuthResponseDto>(this.createCompleteRoute(route, environment.AUTH_API), body);
+  public loginUser = (body: UserForAuthenticationDto) => {
+    return this.http.post<AuthResponseDto>(environment.AUTH_API, body);
   }
 
 }

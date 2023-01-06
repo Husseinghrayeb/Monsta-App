@@ -1,11 +1,59 @@
 <div
     style="display: flex; flex-direction: column; align-items: center; justify-content: space-around; height: 100vh; width: 100%;;">
     <div
-        style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; height: 15%; width: 90%; border: 1px solid;">
-
+        style="display: flex; flex-direction: row; align-items: center; justify-content: space-around; height: 15%; width: 90%; border: 1px solid;">
+        <div style="display: flex; flex-direction: row; height: 50%; width: 30%;">
+            <button mat-raised-button color="accent" style="width: 50%; border-radius: 5px;"
+                (click)="getSpecificAndroidAppsByCountryAndDate()">
+                <mat-icon>android</mat-icon>
+            </button>
+            <button mat-raised-button color="accent" style="width: 50%; border-radius: 5px;"
+                (click)="getSpecificIOSAppsByCountryAndDate()">
+                <mat-icon>apple</mat-icon>
+            </button>
+        </div>
+        <mat-form-field appearance="outline">
+            <mat-select placeholder="Select Country" (selectionChange)="changeCountry($event)">
+                <mat-option *ngFor="let option of countries" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Select Date</mat-label>
+            <input matInput [(ngModel)]="serializedDate" [matDatepicker]="datePicker" placeholder="yyyy-MM-dd">
+            <mat-datepicker-toggle matSuffix [for]="datePicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
     </div>
-    <div
-        style="display: flex; flex-direction: row; align-items: center; justify-content: space-around; flex-wrap: wrap; height: 75%; width: 90%; border: 1px solid;">
-        
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-around; flex-wrap: wrap; height: 75%; width: 90%; border: 1px solid; overflow: auto;"
+        *ngIf="apps?.length == 0">
+        <div style="display: flex; flex-direction: column; justify-content: center; height: 30%; width: 15%; border: 1px solid; margin-bottom: 2%; margin-top: 2%;"
+            *ngFor="let item of genreRanks">
+            <img src="" style="height: 70%; width: 100%;" />
+            <div
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 30%;">
+                <b>{{item.name}}</b>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-around; flex-wrap: wrap; height: 75%; width: 90%; border: 1px solid; overflow: auto;"
+        *ngIf="apps?.length > 0">
+        <div style="display: flex; flex-direction: column; justify-content: center; height: 48%; width: 15%; border: 1px solid; margin-bottom: 2%; margin-top: 2%; padding-bottom: 1%;"
+            *ngFor="let item of apps"  (click)="gotoDetails(item)">
+            <img src="{{item.icon_url}}" style="height: 50%; width: 100%;" />
+            <div
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 50%;">
+                <b>{{item.app_name}}</b>
+                <p>{{item.publisher_name}}</p>
+                <div
+                    style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; height: 8%;">
+                    <mat-icon *ngFor="let num of [1,2,3,4,5]"
+                        [ngStyle]="{'color': getColor(num, item.avg_rating)}" style="font-size: 1.8rem;">star</mat-icon>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

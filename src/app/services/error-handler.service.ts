@@ -10,16 +10,6 @@ export class ErrorHandlerService {
   constructor(private _router: Router) { }
 
   public handleError = (error: HttpErrorResponse) => {
-    return this.handleUnauthorized(error);
-  }
-
-  private handleUnauthorized = (error: HttpErrorResponse) => {
-    if (this._router.url === '/login') {
-      return ' Wrong Username or Password';
-    }
-    else {
-      this._router.navigate(['/login']);
-      return error.message;
-    }
+    return error.error.errorMessage;
   }
 }

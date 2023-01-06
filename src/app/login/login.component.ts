@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       email: login.username,
       password: login.password
     }
-    this.authService.loginUser('login', userForAuth)
+    this.authService.loginUser(userForAuth)
     .subscribe({
       next: (res:AuthResponseDto) => {
        localStorage.setItem("token", res.token);

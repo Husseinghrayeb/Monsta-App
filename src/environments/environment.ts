@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   API_KEY: "410d5abb97e5304c568758b13d75f1223ccfa17c",
-  AUTH_API: "http://localhost:5001/api/auth/",
+  AUTH_API: "https://localhost:44353/auth",
   APP_API: "https://api.appmonsta.com/v1/stores/"
 };
 

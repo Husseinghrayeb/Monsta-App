@@ -1,0 +1,36 @@
+<div
+    style="display: flex; flex-direction: column; align-items: center; justify-content: space-around; height: 100vh; width: 100%;">
+    <div
+        style="display: flex; flex-direction: column; height: 70%; width: 80%; border: 1px solid; justify-content: space-around;">
+        <div
+            style="display: flex; flex-direction: row; justify-content: space-around; height: 40%; align-items: center; width: 100%;">
+            <img src="{{logoUrl}}" style="width: 20%; height: 80%;" />
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <b>App Name: </b>
+                    <p> {{appName}}</p>
+                </div>
+
+                <div
+                    style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; height: 30%;">
+                    <mat-icon *ngFor="let num of [1,2,3,4,5]" [ngStyle]="{'color': getColor(num, appRank)}"
+                        style="font-size: 2rem;">star</mat-icon>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: flex; flex-direction: row;">
+                    <b>Publisher Name: </b>
+                    <p> {{appPublisher}}</p>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <b>Genres: </b>
+                    <p> {{appGenre}}</p>
+                </div>
+            </div>
+        </div>
+        <div
+            style="display: flex; flex-direction: row; justify-content: space-around; height: 50%; align-items: center;">
+            <img src="{{url}}" style="width: 10%; height: 80%;" *ngFor="let url of appScreenShotsUrls" />
+        </div>
+    </div>
+</div>
